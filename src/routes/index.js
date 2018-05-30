@@ -97,13 +97,13 @@ var IndexRoute = (function () {
                         res.json(transactionHash);
                     }
                     else {
-                        res.status(400);
+                        res.status(500);
                         res.json(transactionHash);
                     }
                 });
             }
             catch (err) {
-                res.status(400);
+                res.status(500);
                 res.json(transactionHash);
             }
         });
@@ -129,7 +129,7 @@ var IndexRoute = (function () {
                 res.json(result);
             }
             catch (err) {
-                res.status(400);
+                res.status(500);
                 res.json(err);
             }
         });
@@ -156,19 +156,19 @@ var IndexRoute = (function () {
                     if (!error) {
                         transactionHash = result;
                         console.log("result ", result);
-                        res.status(202);
+                        res.status(201);
                         res.json(transactionHash);
                     }
                     else {
                         transactionHash = error;
                         console.log("error ", error);
-                        res.status(400);
+                        res.status(500);
                         res.json(transactionHash);
                     }
                 });
             }
             catch (err) {
-                res.status(400);
+                res.status(500);
                 res.json(err);
             }
         });
