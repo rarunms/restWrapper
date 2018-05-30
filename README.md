@@ -12,7 +12,7 @@ Below rest endpoints available.
 	
 	Arguments:
 	{
-	  "value": "{"Name":"OFS Tech", "team": "BlockChain"}"
+	 "Name":"OFS Tech", "team": "BlockChain"
 	}
 
 2. read(GET)
@@ -21,12 +21,11 @@ Below rest endpoints available.
 
 3. execute(PUT)
 
-    Service URL: http://hostname/{smartcontract_id}/{key}
+    Service URL: http://hostname/{smartcontract_id}/{key}/{method}
 
     Arguments:
         {
-          "value": "{"Name":"OFS Tech", "team": "BlockChain"}",
-          "method": "update"
+          "Name":"OFS Tech", "team": "BlockChain"
         }
 
 <a href="https://heroku.com/deploy?template=https://github.com/objectfrontiergit/restWrapper">

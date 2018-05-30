@@ -30,12 +30,13 @@ var IndexRoute = (function () {
         router.post("/:smartcontractId/:key", function (req, res, next) {
             var blockchainurl = process.env.BLOCKCHAIN_SERVICE_URL;
             var web3 = new Web3(new Web3.providers.HttpProvider(blockchainurl));
-            var requestData = req.body;
+            var requestData = JSON.stringify(req.body);
             var requestParams = req.params;
             var contractAddress = requestParams.smartcontractId;
             var transactionHash = "";
             var input = fs.readFileSync('./assets/HLSABI.json', "utf8");
             var abi = JSON.parse(input);
+            console.log(requestParams, JSON.parse(requestData));
             try {
                 var myContract = web3.eth.contract(abi);
                 var myContractInstance = myContract.at(contractAddress);
@@ -44,7 +45,8 @@ var IndexRoute = (function () {
                     gas: 3000000,
                     gasPrice: 0
                 };
-                myContractInstance.write(requestParams.key, requestData.value, transactionObject, function (error, result) {
+                console.log(requestParams, requestData);
+                myContractInstance.write(requestParams.key, requestData, transactionObject, function (error, result) {
                     if (!error) {
                         transactionHash = result;
                         res.status(201);
@@ -57,14 +59,15 @@ var IndexRoute = (function () {
                 });
             }
             catch (err) {
+                console.log("error", err);
                 res.status(500);
-                res.json(transactionHash);
+                res.json(err);
             }
         });
         router.get("/:smartcontractId/:key", function (req, res, next) {
             var blockchainurl = process.env.BLOCKCHAIN_SERVICE_URL;
             var web3 = new Web3(new Web3.providers.HttpProvider(blockchainurl));
-            var requestData = req.body;
+            var requestData = JSON.stringify(req.body);
             var requestParams = req.params;
             var contractAddress = requestParams.smartcontractId;
             var transactionHas = "";
@@ -86,7 +89,7 @@ var IndexRoute = (function () {
                     }
                     var resultObject = {
                         key: requestParams.key,
-                        value: JSON.stringify(resultData).replace("'", "\\\'")
+                        value: JSON.stringify(resultData)
                     };
                     res.status(200);
                     res.json(resultObject);
@@ -100,14 +103,14 @@ var IndexRoute = (function () {
                 res.json(err);
             }
         });
-        router.put("/:smartcontractId/:key", function (req, res, next) {
+        router.put("/:smartcontractId/:key/:method", function (req, res, next) {
             var blockchainurl = process.env.BLOCKCHAIN_SERVICE_URL;
             var web3 = new Web3(new Web3.providers.HttpProvider(blockchainurl));
-            var requestData = req.body;
+            var requestData = JSON.stringify(req.body);
             var requestParams = req.params;
             var contractAddress = requestParams.smartcontractId;
             var transactionHash = "";
-            var updateData = [web3.fromAscii(requestParams.key), web3.fromAscii(requestData.value)];
+            var updateData = [web3.fromAscii(requestParams.key), web3.fromAscii(requestData)];
             console.log("requestData", requestData);
             var input = fs.readFileSync('./assets/HLSABI.json', "utf8");
             var abi = JSON.parse(input);
@@ -119,7 +122,7 @@ var IndexRoute = (function () {
                     gas: 3000000,
                     gasPrice: 0
                 };
-                myContractInstance.executeFunction(requestData.method, requestParams.key, requestData.value, transactionObject, function (error, result) {
+                myContractInstance.executeFunction(requestParams.method, requestParams.key, requestData, transactionObject, function (error, result) {
                     if (!error) {
                         transactionHash = result;
                         console.log("result ", result);
