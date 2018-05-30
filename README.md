@@ -1,32 +1,49 @@
-# restWrapper
-To run the application follow the below instrucations
 
-1. SET blockchain enviornment variable
-2. start the app : "npm run start"
 
-Below rest endpoints available.
+# Smart contract REST wrapper
 
-1. Write(POST)
+### What is this app?
 
-    Service URL: http://hostname/{smartcontract_id}/{key}
-	
-	Arguments:
-	{
-	 "Name":"OFS Tech", "team": "BlockChain"
-	}
+Think of this generic smart contract as a key-value store in blockchain with functions to read, write and execute some business logic.
+The REST API will be a wrapper around the said operations and will take in the contract id and method params
 
-2. read(GET)
+### How to use this?
 
-    Service URL: http://hostname/{smartcontract_id}/{key}
+This wrapper can be used to call any smart contract deployed to the blockchain with the following interface.
+```
+interface SalesforceSmartContractI {
+    function write(string key, string value) external;
+    function executeFunction(string functionName, string key, string value) external;
+    function read(string key) external view returns (string, string, uint, uint, string);
+}
+```
 
-3. execute(PUT)
+This wrapper has the following endpoints
 
-    Service URL: http://hostname/{smartcontract_id}/{key}/{method}
+POST https://{heroku-restwrapperapp.heroku.com}/{smartcontract_id}/{key}
+Body: JSON value of the key
 
-    Arguments:
-        {
-          "Name":"OFS Tech", "team": "BlockChain"
-        }
+
+GET https: //{heroku-restwrapperapp.heroku.com}/{smartcontract_id}/{key}
+Response:
+```
+     {“key”:”key”,
+      “value”:[“array of string that the smart contract returns”]
+    }
+```
+PUT https: //{heroku-restwrapperapp.heroku.com}/{smartcontract_id}/{key}/{method}
+Body: JSON value of the key
+
+### How to run this?
+
+To run the application locally follow the below instructions
+
+1. Clone code
+2. SET BLOCKCHAIN_SERVICE_URL environment variable. This will be the URL of the Blockchain you deployed using Heroku Blockchain Add-On https://elements.heroku.com/addons/blockchain  
+3. SET PORT environment variable
+4. Start the app: "npm run start"
+
+But you can just use the “Deploy to Heroku” button to quickly deploy the app to Heroku
 
 <a href="https://heroku.com/deploy?template=https://github.com/objectfrontiergit/restWrapper">
 <img src="https://www.herokucdn.com/deploy/button.svg" alt="Deploy">
