@@ -64,45 +64,6 @@ export class Server {
       extended: true
     }));
 
-    this.app.use(cors());
-
-    this.app.use(express.static('public/dist'));
-
-    this.app.get('/accountmanage', function(req, res){
-      var uid = req.params.uid,
-      path = req.params[0] ? req.params[0] : 'index.html';
-      res.sendFile(path, {root: 'public/dist'});
-      });
-
-    this.app.get('/accountmanage', function(req, res){
-        var uid = req.params.uid,
-        path = req.params[0] ? req.params[0] : 'index.html';
-        res.sendFile(path, {root: 'public/dist'});
-        });
-    
-    this.app.get('/deploy/deploycontract', function(req, res){
-        var uid = req.params.uid,
-        path = req.params[0] ? req.params[0] : 'index.html';
-        res.sendFile(path, {root: 'public/dist'});
-       });
-
-  this.app.get('/analytics', function(req, res){
-      var uid = req.params.uid,
-      path = req.params[0] ? req.params[0] : 'index.html';
-      res.sendFile(path, {root: 'public/dist'});
-      });
-
-  this.app.get('/scheduling', function(req, res){
-        var uid = req.params.uid,
-        path = req.params[0] ? req.params[0] : 'index.html';
-        res.sendFile(path, {root: 'public/dist'});
-        });
-  this.app.get('/blockexplorer', function(req, res){
-        var uid = req.params.uid,
-        path = req.params[0] ? req.params[0] : 'index.html';
-        res.sendFile(path, {root: 'public/dist'});
-        });
-
     // catch 404 and forward to error handler
     this.app.use(function(err: any, req: express.Request, res: express.Response, next: express.NextFunction) {
         err.status = 404;
