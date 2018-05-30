@@ -89,7 +89,7 @@ var IndexRoute = (function () {
                     }
                     var resultObject = {
                         key: requestParams.key,
-                        value: JSON.stringify(resultData)
+                        value: resultData
                     };
                     res.status(200);
                     res.json(resultObject);

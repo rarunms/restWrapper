@@ -31,7 +31,7 @@ export class IndexRoute {
         console.log(process.env.HEROKU_DNS_FORMATION_NAME);
         res.send({"blockchainurl":blockchainurl, "privateIp":privateIp});
     });
-    
+
     router.post("/:smartcontractId/:key", function (req, res, next) {
         var blockchainurl = process.env.BLOCKCHAIN_SERVICE_URL;
         var web3 = new Web3(new Web3.providers.HttpProvider(blockchainurl));
@@ -51,7 +51,7 @@ export class IndexRoute {
                 gasPrice: 0
             };
             console.log(requestParams, requestData);
-            myContractInstance.write(requestParams.key, requestData, transactionObject, (error, result) => { 
+            myContractInstance.write(requestParams.key, requestData, transactionObject, (error, result) => {
                 if(!error) {
                     transactionHash = result;
                     res.status(201);
@@ -93,7 +93,7 @@ export class IndexRoute {
                 }
                 const resultObject = {
                     key: requestParams.key,
-                    value: JSON.stringify(resultData)
+                    value: resultData
                 };
                 res.status(200);
                 res.json(resultObject);
@@ -125,7 +125,7 @@ export class IndexRoute {
                 gas: 3000000,
                 gasPrice: 0
             };
-            myContractInstance.executeFunction(requestParams.method, requestParams.key, requestData, transactionObject, (error, result) => { 
+            myContractInstance.executeFunction(requestParams.method, requestParams.key, requestData, transactionObject, (error, result) => {
                 if(!error) {
                     transactionHash = result;
                     console.log("result ", result);
