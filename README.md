@@ -17,6 +17,7 @@ interface SalesforceSmartContractI {
     function read(string key) external view returns (string, string, uint, uint, string);
 }
 ```
+refer to a sample here https://github.com/objectfrontiergit/restWrapper/blob/master/assets/HLSContract.sol
 
 This wrapper has the following endpoints
 
