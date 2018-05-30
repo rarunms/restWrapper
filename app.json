@@ -1,5 +1,5 @@
 {
-    "name": "REST WRAPPER",
+    "name": "SMART CONTRACT REST WRAPPER",
     "description": "SMART CONTRACT REST API",
     "repository": "https://github.com/objectfrontiergit/restWrapper.git",
     "keywords": ["node", "express", "web3", "ethereum" ],

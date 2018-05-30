@@ -8,7 +8,7 @@ Below rest endpoints available.
 
 1. Write(POST)
 
-    Service URL: http://<<hostname>>/{smartcontract_id}/{key}
+    Service URL: http://hostname/{smartcontract_id}/{key}
 	
 	Arguments:
 	{
@@ -17,11 +17,11 @@ Below rest endpoints available.
 
 2. read(GET)
 
-    Service URL: http://<<hostname>>/{smartcontract_id}/{key}
+    Service URL: http://hostname/{smartcontract_id}/{key}
 
 3. execute(PUT)
 
-    Service URL: http://<<hostname>>/{smartcontract_id}/{key}
+    Service URL: http://hostname/{smartcontract_id}/{key}
 
     Arguments:
         {
