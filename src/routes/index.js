@@ -79,13 +79,21 @@ var IndexRoute = (function () {
                     gasPrice: 0
                 };
                 var result = myContractInstance.read(requestParams.key);
-                var copy = [];
-                var resultObject = {
-                    key: result[0],
-                    value: result[1]
-                };
-                res.status(200);
-                res.json(resultObject);
+                var resultData = [];
+                if (result.length != 0) {
+                    for (var i = 1; i < result.length; i++) {
+                        resultData.push(result[i]);
+                    }
+                    var resultObject = {
+                        key: requestParams.key,
+                        value: JSON.stringify(resultData).replace("'", "\\\'")
+                    };
+                    res.status(200);
+                    res.json(resultObject);
+                }
+                else {
+                    res.status(400);
+                }
             }
             catch (err) {
                 res.status(500);

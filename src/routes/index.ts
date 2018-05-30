@@ -83,13 +83,20 @@ export class IndexRoute {
                 gasPrice: 0
             };
             var result = myContractInstance.read(requestParams.key);
-            const copy = [];
-            const resultObject = {
-                key: result[0],
-                value: result[1]
-            };
-            res.status(200);
-            res.json(resultObject);
+            const resultData = [];
+            if(result.length != 0) {
+                for (let i=1; i<result.length; i++) {
+                    resultData.push(result[i])
+                }
+                const resultObject = {
+                    key: requestParams.key,
+                    value: JSON.stringify(resultData)
+                };
+                res.status(200);
+                res.json(resultObject);
+            } else {
+                res.status(400);
+            }
         } catch (err) {
             res.status(500);
             res.json(err);
