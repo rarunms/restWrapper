@@ -17,7 +17,8 @@
     "solc": "^0.4.24",
     "web3": "^0.20.6",
     "web3_extended": "^1.0.0",
-    "web3_ipc": "^1.4.0"
+    "web3_ipc": "^1.4.0",
+    "swagger-express": "latest"
   },
   "devDependencies": {
     "@types/body-parser": "1.16.8",

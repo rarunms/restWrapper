@@ -1,6 +1,7 @@
 var bodyParser = require("body-parser");
 var express = require("express");
 var errorHandler = require("errorhandler");
+var swagger = require('swagger-express');
 var index_1 = require("./routes/index");
 var contract_controller_1 = require("./app/contract/contract.controller");
 var Server = (function () {
@@ -52,6 +53,18 @@ var Server = (function () {
         });
         //error handling
         this.app.use(errorHandler());
+        //Swagger init
+        this.app.use(swagger.init(this.app, {
+            apiVersion: '1.0',
+            swaggerVersion: '2.0',
+            swaggerURL: '/docs',
+            swaggerJSON: './doc.json',
+            swaggerUI: './public/swagger/',
+            basePath: 'http://localhost:' + process.env.PORT,
+            apis: ['./src/routes/index.js'],
+            middleware: function (req, res) {
+            }
+        }));
     };
     Server.prototype.routes = function () {
         var router;

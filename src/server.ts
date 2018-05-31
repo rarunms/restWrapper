@@ -4,7 +4,7 @@ import * as express from "express";
 import * as path from "path";
 import * as errorHandler from "errorhandler";
 import * as cors from 'cors';
-
+import * as swagger from 'swagger-express';
 
 
 import { IndexRoute } from "./routes/index";
@@ -72,6 +72,19 @@ export class Server {
 
     //error handling
     this.app.use(errorHandler());
+
+    //Swagger init
+    this.app.use(swagger.init(this.app, {
+      apiVersion: '1.0',
+      swaggerVersion: '2.0',
+      swaggerURL: '/docs',
+      swaggerJSON: './doc.json',//swagger service description
+      swaggerUI: './public/swagger/',
+      basePath: 'http://localhost:'+process.env.PORT,
+      apis: ['./src/routes/index.js'],    
+      middleware: function(req, res){
+      }
+    }));
   }
 
   private routes() {

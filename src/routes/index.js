@@ -16,16 +16,20 @@ var IndexRoute = (function () {
      * @static
      */
     IndexRoute.create = function (router) {
+        router.get("/", function (req, res, next) {
+            res.redirect('/docs');
+        });
         router.get("/bcurl", function (req, res, next) {
             var blockchainurl = process.env.BLOCKCHAIN_SERVICE_URL;
             var privateIp = process.env.HEROKU_PRIVATE_IP;
             console.log(process.env.BLOCKCHAIN_SERVICE_URL);
             console.log(blockchainurl);
-            console.log(process.env.HEROKU_PRIVATE_IP);
-            console.log(process.env.HEROKU_DNS_APP_NAME);
-            console.log(process.env.HEROKU_DNS_DYNO_NAME);
-            console.log(process.env.HEROKU_DNS_FORMATION_NAME);
             res.send({ "blockchainurl": blockchainurl, "privateIp": privateIp });
+        });
+        router.get("/doc.json", function (req, res, next) {
+            var docjson = fs.readFileSync('./assets/doc.json', "utf8");
+            res.header('Access-Control-Allow-Origin', '*');
+            res.download('./assets/doc.json');
         });
         router.post("/:smartcontractId/:key", function (req, res, next) {
             var blockchainurl = process.env.BLOCKCHAIN_SERVICE_URL;
