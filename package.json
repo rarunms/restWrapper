@@ -18,7 +18,8 @@
     "web3": "^0.20.6",
     "web3_extended": "^1.0.0",
     "web3_ipc": "^1.4.0",
-    "swagger-express": "1.0.5"
+    "swagger-express": "1.0.5",
+    "serve-index": "1.9.1"
   },
   "devDependencies": {
     "@types/body-parser": "1.16.8",
