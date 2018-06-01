@@ -1,7 +1,7 @@
 {
 	"swagger": "2.0",
 	"info": {
-		"description": "OFS Private Blockchain API Documentation",
+		"description": "Use this Smart Contract REST wrapper to accelerate your DApp development",
 		"version": "1.0.0",
 		"title": "OFS Smart Contract Gateway",
 		"termsOfService": "http://swagger.io/terms/"
