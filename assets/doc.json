@@ -187,6 +187,106 @@
 					}
 
 			}
+		
+		},
+		"/contract/exec/{contractId}":{
+			"post":{
+				"tags":["Smart Contract"],
+				"summary": " Call your business logic using contract ABI",
+				"description": "Use this service call the execute function which in turn can call internal business logic",
+				"produces": [
+						"application/json"
+					],
+				"consumes":[
+						"application/json"
+					],
+				"parameters":[
+						{
+							"in":"path",
+							"name":"contractId",
+							"required": true,
+							"type":"string",
+							"example":"0xa5597b9cf1f54e8d02ebad1bc3b7cda06abb842d",
+							"description":"Smart contract id"
+					   },
+					   {
+						"in": "query",
+						"name": "type",
+						"description": "defines ledger operation",
+						"type": "string",
+						"enum": [ "read", "store"],
+						"required": true
+					  },
+					  {
+						"in": "query",
+						"name": "funcName",
+						"description": "contract method name to execute",
+						"type": "string",
+						"required": true
+					   },
+					   {
+						"in": "query",
+						"name": "funcParams",
+						"description": "method parameters",
+						"type": "string",
+						"example":"values1,values2",
+						"required": true
+					   },					
+					   {
+							"in":"body",
+							"name":"body",
+							"required": true,
+							"description":"Smart contract abi",
+							"schema":{
+								"type":"string"
+								
+							}
+					   }
+					],
+					"responses":{
+						"200":
+						{
+							"description":"Ok",
+							"schema":{
+							"type":"object",
+								"example":"sample data"
+							}					
+					   }
+				}
+			}
+		},
+		"/list/keys/{contractId}":{
+			"get":{
+				"tags":["Smart Contract"],
+				"summary": " get all keys",
+				"description": "all keys",
+				"produces": [
+						"application/json"
+					],
+				"consumes":[
+						"application/json"
+					],
+				"parameters":[
+						{
+							"in":"path",
+							"name":"contractId",
+							"required": true,
+							"type":"string",
+							"example":"0xa5597b9cf1f54e8d02ebad1bc3b7cda06abb842d",
+							"description":"Smart contract id"
+					   }
+					],
+					"responses":{
+						"200":
+						{
+							"description":"Ok",
+							"schema":{
+							"type":"object",
+							"example":"{\"key\":\"value\"}"
+							}					
+					   }
+				}
+			}
 		}
 	}
 

@@ -1,0 +1,7 @@
+{
+  "name": "ethereum-adminpanel-server-test",
+  "version": "1.0.0",
+  "dependencies": {
+    "web3": "0.20.6"
+  }
+}
