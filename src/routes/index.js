@@ -57,7 +57,7 @@ var IndexRoute = (function () {
                 var transactionObject = {
                     from: web3.personal.listAccounts[0],
                     gas: 3000000,
-                    gasPrice: 0
+                    gasPrice: 18000000000
                 };
                 myContractInstance.write(requestParams.key, requestData, transactionObject, function (error, result) {
                     if (!error) {
@@ -111,7 +111,7 @@ var IndexRoute = (function () {
                 var transactionObject = {
                     from: web3.personal.listAccounts[0],
                     gas: 3000000,
-                    gasPrice: 0
+                    gasPrice: 1800
                 };
                 var result = myContractInstance.read(requestParams.key);
                 var resultData = [];
@@ -160,7 +160,7 @@ var IndexRoute = (function () {
                 var transactionObject = {
                     from: web3.personal.listAccounts[0],
                     gas: 3000000,
-                    gasPrice: 0
+                    gasPrice: 1800
                 };
                 myContractInstance.executeFunction(requestParams.method, requestParams.key, requestData, transactionObject, function (error, result) {
                     if (!error) {
@@ -208,7 +208,8 @@ var IndexRoute = (function () {
             var transactionHash = "";
             var abi =requestData;
             var fromAddress = defaultAccount;
-            var params = requestQuery.funcParams.split(",");
+            console.log("requestQuery.funcParams", requestQuery.funcParams);
+            var params = requestQuery.funcParams != undefined ? requestQuery.funcParams.split(",") : '';
             try {
                 var transactionObject = {
                     from: fromAddress,
@@ -238,10 +239,12 @@ var IndexRoute = (function () {
                         res.json(err);
                     });
                 } 
-            } catch (err) {
-                console.log("Console Error ", err);
+            } catch (error) {
+                console.log("Console Error ", error);
+                const err = new Error(error);
+                const errorMsg = err.message;
                 res.status(500);
-                res.json(err);
+                res.send(errorMsg);
             }
         }); 
 

@@ -230,7 +230,7 @@
 						"description": "method parameters",
 						"type": "string",
 						"example":"values1,values2",
-						"required": true
+						"required": false
 					   },					
 					   {
 							"in":"body",
